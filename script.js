@@ -36,3 +36,29 @@ function type() {
 }
 
 document.addEventListener('DOMContentLoaded', type);
+
+
+
+document.addEventListener('DOMContentLoaded', type);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    const header = document.querySelector('header');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                const headerHeight = header.offsetHeight + 20;
+                const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+
